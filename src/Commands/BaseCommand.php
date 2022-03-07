@@ -2,7 +2,7 @@
 
 namespace ZnDatabase\Tool\Commands;
 
-use ZnLib\Fixture\Domain\Services\FixtureService;
+use ZnDatabase\Fixture\Domain\Services\FixtureService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

@@ -9,11 +9,11 @@ use Symfony\Component\Console\Command\Command;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnDatabase\Base\Domain\Facades\DbFacade;
 use ZnDatabase\Eloquent\Domain\Factories\ManagerFactory;
-use ZnLib\Fixture\Domain\Entities\FixtureEntity;
+use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnLib\Console\Symfony4\Helpers\OutputHepler;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use ZnLib\Fixture\Domain\Services\FixtureService;
+use ZnDatabase\Fixture\Domain\Services\FixtureService;
 use ZnDatabase\Base\Domain\Repositories\Eloquent\SchemaRepository;
 
 class DropDatabaseCommand extends Command
