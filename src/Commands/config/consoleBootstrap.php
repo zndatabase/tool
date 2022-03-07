@@ -7,7 +7,7 @@ use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\EntityManager;
-use ZnLib\Db\Capsule\Manager;
+use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Eloquent\Domain\Factories\ManagerFactory;
 
 DotEnv::init();

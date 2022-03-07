@@ -3,7 +3,7 @@
 namespace ZnDatabase\Tool\Commands;
 
 use Symfony\Component\Console\Input\InputOption;
-use ZnLib\Db\Capsule\Manager;
+use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Command\Command;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
