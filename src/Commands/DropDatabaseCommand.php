@@ -3,6 +3,7 @@
 namespace ZnDatabase\Tool\Commands;
 
 use Symfony\Component\Console\Input\InputOption;
+use ZnDatabase\Base\Console\Traits\OverwriteDatabaseTrait;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Command\Command;
@@ -18,6 +19,9 @@ use ZnDatabase\Base\Domain\Repositories\Eloquent\SchemaRepository;
 
 class DropDatabaseCommand extends Command
 {
+    
+    use OverwriteDatabaseTrait;
+    
     protected static $defaultName = 'db:database:drop';
     private $capsule;
     private $schemaRepository;
@@ -46,6 +50,10 @@ class DropDatabaseCommand extends Command
     {
         $output->writeln(['<fg=white># Drop database</>']);
 
+        if (!$this->isContinue($input, $output)) {
+            return 0;
+        }
+        
         $connections = DbFacade::getConfigFromEnv();
         foreach ($connections as $connectionName => $connection) {
             $conn = $this->capsule->getConnection($connectionName);
