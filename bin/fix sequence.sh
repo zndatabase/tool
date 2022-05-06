@@ -1,2 +1,3 @@
 #!/bin/sh
-php console db:database:fix-sequence
+cd ../../../bin
+php zn db:database:fix-sequence

@@ -1,2 +1,3 @@
 #!/bin/sh
-php console db:database:drop
+cd ../../../bin
+php zn db:database:drop
