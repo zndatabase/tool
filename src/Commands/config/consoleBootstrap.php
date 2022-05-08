@@ -1,7 +1,7 @@
 <?php
 
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
+use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Kernel;
 use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
