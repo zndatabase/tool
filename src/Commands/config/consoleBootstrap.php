@@ -12,6 +12,8 @@ use ZnDatabase\Eloquent\Domain\Factories\ManagerFactory;
 
 DotEnv::init();
 
+\ZnCore\Base\Helpers\DeprecateHelper::hardThrow();
+
 $kernel = new Kernel('console');
 $container = $kernel->getContainer();
 
