@@ -7,7 +7,7 @@ use ZnDatabase\Base\Console\Traits\OverwriteDatabaseTrait;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Command\Command;
-use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
+use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnDatabase\Base\Domain\Facades\DbFacade;
 use ZnDatabase\Eloquent\Domain\Factories\ManagerFactory;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
