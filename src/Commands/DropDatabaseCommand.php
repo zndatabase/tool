@@ -2,26 +2,20 @@
 
 namespace ZnDatabase\Tool\Commands;
 
-use Symfony\Component\Console\Input\InputOption;
-use ZnDatabase\Base\Console\Traits\OverwriteDatabaseTrait;
-use ZnDatabase\Eloquent\Domain\Capsule\Manager;
-use ZnCore\Domain\Collection\Libs\Collection;
 use Symfony\Component\Console\Command\Command;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
-use ZnDatabase\Base\Domain\Facades\DbFacade;
-use ZnDatabase\Eloquent\Domain\Factories\ManagerFactory;
-use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
-use ZnLib\Console\Symfony4\Helpers\OutputHepler;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use ZnDatabase\Fixture\Domain\Services\FixtureService;
+use ZnDatabase\Base\Console\Traits\OverwriteDatabaseTrait;
+use ZnDatabase\Base\Domain\Facades\DbFacade;
 use ZnDatabase\Base\Domain\Repositories\Eloquent\SchemaRepository;
+use ZnDatabase\Eloquent\Domain\Factories\ManagerFactory;
 
 class DropDatabaseCommand extends Command
 {
-    
+
     use OverwriteDatabaseTrait;
-    
+
     protected static $defaultName = 'db:database:drop';
     private $capsule;
     private $schemaRepository;
@@ -53,13 +47,13 @@ class DropDatabaseCommand extends Command
         if (!$this->isContinue($input, $output)) {
             return 0;
         }
-        
+
         $connections = DbFacade::getConfigFromEnv();
         foreach ($connections as $connectionName => $connection) {
             $conn = $this->capsule->getConnection($connectionName);
             $tableList = $this->schemaRepository->allTables();
             //dd($tableList);
-            
+
             /*$tableList = $conn->select('
                 SELECT *
                 FROM pg_catalog.pg_tables
@@ -68,32 +62,32 @@ class DropDatabaseCommand extends Command
             $schemas = [];
             foreach ($tableList as $tableEntity) {
                 $tableName = $tableEntity->getName();
-                if($tableEntity->getSchemaName()) {
+                if ($tableEntity->getSchemaName()) {
                     $tableName = $tableEntity->getSchemaName() . '.' . $tableName;
                 }
                 //dd($tableEntity->getSchemaName());
-                
+
                 $tables[] = $tableName;
-                if($tableEntity->getSchemaName() && $tableEntity->getSchemaName() != 'public') {
+                if ($tableEntity->getSchemaName() && $tableEntity->getSchemaName() != 'public') {
                     $schemas[] = $tableEntity->getSchemaName();
                 }
             }
 //            dd($tables);
-            if(empty($tables)) {
+            if (empty($tables)) {
                 $output->writeln(['', '<fg=yellow>Not found tables!</>', '']);
             } else {
-                
+
                 /*foreach ($tables as $t) {
                     $this->capsule->getSchemaByTableName($t)->dropIfExists($t);
                 }*/
-                
+
                 $sql = 'DROP TABLE ' . implode(', ', $tables);
                 $conn->statement($sql);
             }
-            
+
             $schemaList = $conn->select('select nspname from pg_catalog.pg_namespace;');
             foreach ($schemaList as $schemaRecord) {
-                if(strpos($schemaRecord->nspname, 'pg_') === false && !in_array($schemaRecord->nspname, ['information_schema', 'public'])) {
+                if (strpos($schemaRecord->nspname, 'pg_') === false && !in_array($schemaRecord->nspname, ['information_schema', 'public'])) {
                     $sql = 'DROP SCHEMA ' . $schemaRecord->nspname;
                     $conn->statement($sql);
                 }
